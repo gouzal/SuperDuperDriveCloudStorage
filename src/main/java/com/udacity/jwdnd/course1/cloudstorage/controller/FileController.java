@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("file")
 public class FileController {
 
-    FileService fileService;
+    private final FileService fileService;
 
     public FileController(FileService fileService) {
         this.fileService = fileService;
@@ -34,13 +34,7 @@ public class FileController {
     @PostMapping("add")
     public String addNewFile(@RequestParam("fileUpload") MultipartFile fileUpload, Model model) {
         try {
-            /*var file = new File();
-            file.setFileName(fileUpload.getOriginalFilename());
-            file.setContentType(fileUpload.getContentType());
-            file.setFileSize(fileUpload.getBytes().length + "");
-            file.setUserId(2L);
-            file.setFileData(fileUpload.getBytes());*/
-            var file=new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(), String.valueOf(fileUpload.getBytes().length), 2L, fileUpload.getBytes());
+            var file = new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(), String.valueOf(fileUpload.getBytes().length), 2L, fileUpload.getBytes());
             var countInsertedFile = fileService.insert(file);
             model.addAttribute("countInsertedFile", countInsertedFile);
         } catch (IOException ex) {
