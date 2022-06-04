@@ -23,6 +23,15 @@ public class File {
         this.fileData = data;
     }
 
+    public File(String fileName, String contentType, String fileSize, long userId, byte[] fileData) {
+        this.fileName = fileName;
+        this.contentType = contentType;
+        this.fileSize = fileSize;
+        this.userId = userId;
+        this.fileData = fileData;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 3;
