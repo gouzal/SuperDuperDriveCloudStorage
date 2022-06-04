@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,11 +58,10 @@ public class FileController {
     }
 
     @GetMapping("view/{id}")
-    public void viewFile(@PathVariable("id") long id, Model model, HttpServletResponse response) throws FileNotFoundException, IOException {
+    public void downloadFile(@PathVariable("id") long id, Model model, HttpServletResponse response) throws FileNotFoundException, IOException {
         var file = fileService.find(id);
-        InputStream input = new ByteArrayInputStream(file.getFileData());
-        org.apache.commons.io.IOUtils.copy(input, response.getOutputStream());
         response.setContentType(file.getContentType());
-        response.flushBuffer();
+        response.addHeader("Content-Disposition", "attachment; filename=" + file.getFileName());
+        FileCopyUtils.copy(file.getFileData(), response.getOutputStream());
     }
 }
