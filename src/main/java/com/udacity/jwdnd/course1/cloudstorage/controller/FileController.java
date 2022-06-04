@@ -36,12 +36,13 @@ public class FileController {
     @PostMapping("add")
     public String addNewFile(@RequestParam("fileUpload") MultipartFile fileUpload, Model model) {
         try {
-            var file = new File();
+            /*var file = new File();
             file.setFileName(fileUpload.getOriginalFilename());
             file.setContentType(fileUpload.getContentType());
             file.setFileSize(fileUpload.getBytes().length + "");
             file.setUserId(2L);
-            file.setFileData(fileUpload.getBytes());
+            file.setFileData(fileUpload.getBytes());*/
+            var file=new File(0, fileUpload.getOriginalFilename(), fileUpload.getContentType(), String.valueOf(fileUpload.getBytes().length), 2L, fileUpload.getBytes());
             var countInsertedFile = fileService.insert(file);
             model.addAttribute("countInsertedFile", countInsertedFile);
         } catch (IOException ex) {
@@ -61,7 +62,6 @@ public class FileController {
     public void downloadFile(@PathVariable("id") long id, Model model, HttpServletResponse response) throws FileNotFoundException, IOException {
         var file = fileService.find(id);
         response.setContentType(file.getContentType());
-        response.addHeader("Content-Disposition", "attachment; filename=" + file.getFileName());
         FileCopyUtils.copy(file.getFileData(), response.getOutputStream());
     }
 }
