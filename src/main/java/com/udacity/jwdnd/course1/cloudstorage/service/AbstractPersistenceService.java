@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author Larbi
  */
-public  interface AbstractPersistenceService<T> /*permits NoteService, CredentialService, FileService, UserService*/ {
+public interface AbstractPersistenceService<T> /*permits NoteService, CredentialService, FileService, UserService*/ {
 
     public T find(long id);
 
@@ -15,5 +15,7 @@ public  interface AbstractPersistenceService<T> /*permits NoteService, Credentia
     int insert(T obj);
 
     int delete(long id);
+
+    List<T> findAll();
 
 }

@@ -48,4 +48,9 @@ public class NoteServiceImp implements NoteService {
     public int update(Note note) {
         return this.noteMapper.update(note);
     }
+
+    @Override
+    public List<Note> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
 };

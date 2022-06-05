@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.service;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,11 +27,11 @@ public class UserServiceImp implements UserService {
         return user;
     }
 
-    /*@Override
-    public User find(String userName) {
-        var user = this.userMapper.find(userName);
+    @Override
+    public User findByUserName(String userName) {
+        var user = this.userMapper.findByUserName(userName);
         return user;
-    }*/
+    }
 
     @Override
     public int insert(User user) {
@@ -46,5 +47,10 @@ public class UserServiceImp implements UserService {
     @Override
     public int update(User user) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<User> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 };

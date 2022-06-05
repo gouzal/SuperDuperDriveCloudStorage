@@ -48,4 +48,9 @@ public class CredentialServiceImp implements CredentialService {
     public int update(Credential credential) {
       return  this.credentialMapper.update(credential);
     }
+
+    @Override
+    public List<Credential> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 };

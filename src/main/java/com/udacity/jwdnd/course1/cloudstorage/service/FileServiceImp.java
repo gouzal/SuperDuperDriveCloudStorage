@@ -48,4 +48,9 @@ public class FileServiceImp implements FileService {
     public int update(File file) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+
+    @Override
+    public List<File> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
 };
