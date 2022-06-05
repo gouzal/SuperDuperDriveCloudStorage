@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @author Larbi
  */
 @Service
-public  interface FileService extends AbstractService<File> {
+public  interface FileService extends AbstractPersistenceService<File> {
 
     List<File> findAllByUserId(long userId);
 

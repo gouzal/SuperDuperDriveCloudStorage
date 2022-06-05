@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * @author Larbi
  */
 @Service
-public interface UserService extends AbstractService<User> {
+public interface UserService extends AbstractPersistenceService<User> {
 
     //User find(String userName);
 

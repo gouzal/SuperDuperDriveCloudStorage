@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @author Larbi
  */
 @Service
-public interface NoteService extends AbstractService<Note> {
+public interface NoteService extends AbstractPersistenceService<Note> {
 
     List<Note> findAllByUserId(long userid);
 
