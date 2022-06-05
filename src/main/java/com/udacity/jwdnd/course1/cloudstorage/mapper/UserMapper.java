@@ -21,12 +21,12 @@ public interface UserMapper {
     User findByUserName(String userName);
 
     @Select("SELECT * FROM USERS")
-    User findAll();
-
+    List<User> findAll();
+    // todo : fix this bug
     @Update("UPDATE  FILES SET notetitle='#{noteTitle}', notedescription='#{noteDescription}' WHERE noteid = #{noteId}")
     List<User> update(User user);
 
-    @Insert("INSERT INTO NOTES(notetitle,notedescription,userid) VALUES('#{noteTitle}','#{noteDescription}',#{userId})")
+    @Insert("INSERT INTO USERS(firstname,lastname,username,password,salt) VALUES('#{firstname}','#{lastname}','#{username}','#{password}','#{salt}')")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     int insert(User user);
 

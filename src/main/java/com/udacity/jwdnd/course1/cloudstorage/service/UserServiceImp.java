@@ -51,6 +51,6 @@ public class UserServiceImp implements UserService {
 
     @Override
     public List<User> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return this.userMapper.findAll();
     }
 };
