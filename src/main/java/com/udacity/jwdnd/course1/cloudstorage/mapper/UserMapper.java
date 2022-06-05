@@ -17,9 +17,12 @@ public interface UserMapper {
     @Select("SELECT * FROM USERS WHERE USERID  = #{userId}")
     User find(long userId);
 
-    /*@Select("SELECT * FROM USERS WHERE username  = '#{userName}'")
-    User find(String userName);*/
-    
+    @Select("SELECT * FROM USERS WHERE username  = '#{userName}'")
+    User findByUserName(String userName);
+
+    @Select("SELECT * FROM USERS")
+    User findAll();
+
     @Update("UPDATE  FILES SET notetitle='#{noteTitle}', notedescription='#{noteDescription}' WHERE noteid = #{noteId}")
     List<User> update(User user);
 
@@ -29,5 +32,5 @@ public interface UserMapper {
 
     @Delete("DELETE FROM FILES WHERE fileId = #{userId}")
     int delete(long userId);
-    
+
 }
