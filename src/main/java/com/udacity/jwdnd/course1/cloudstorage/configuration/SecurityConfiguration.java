@@ -4,9 +4,11 @@ import com.udacity.jwdnd.course1.cloudstorage.service.AuthService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final AuthService authService;
@@ -28,10 +30,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/login")
+                .permitAll().and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .clearAuthentication(true)
                 .permitAll();
 
-        http.formLogin()
-                .defaultSuccessUrl("/home", true);
+//      http.formLogin()
+//                .defaultSuccessUrl("/home", true);
+//	http.csrf().disable();
     }
 
 }
