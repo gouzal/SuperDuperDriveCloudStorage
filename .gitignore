@@ -63,6 +63,7 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 logs/
+
 ### NetBeans ###
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
