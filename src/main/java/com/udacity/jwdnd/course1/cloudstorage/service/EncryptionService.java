@@ -9,11 +9,20 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Base64;
 
 @Service
 public class EncryptionService {
-    private Logger logger = LoggerFactory.getLogger(EncryptionService.class);
+
+    private final Logger logger = LoggerFactory.getLogger(EncryptionService.class);
+    private static final SecureRandom random;
+    private static final byte[] key;
+
+    static {
+        random = new SecureRandom();
+        key = new byte[16];
+    }
 
     public String encryptValue(String data, String key) {
         byte[] encryptedValue = null;
@@ -45,5 +54,17 @@ public class EncryptionService {
         }
 
         return new String(decryptedValue);
+    }
+
+    public String encryptPassword(String password) {
+        random.nextBytes(key);
+        String encodedKey = Base64.getEncoder().encodeToString(key);
+        return this.encryptValue(password, encodedKey);
+    }
+
+    public String decryptPassword(String encryptedPassword) {
+        random.nextBytes(key);
+        String encodedKey = Base64.getEncoder().encodeToString(key);
+        return this.decryptValue(encryptedPassword, encodedKey);
     }
 }
