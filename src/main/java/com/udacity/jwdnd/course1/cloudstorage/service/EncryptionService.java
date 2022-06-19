@@ -11,18 +11,15 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EncryptionService {
 
     private final Logger logger = LoggerFactory.getLogger(EncryptionService.class);
-    private static final SecureRandom random;
-    private static final byte[] key;
-
-    static {
-        random = new SecureRandom();
-        key = new byte[16];
-    }
+    //private static final SecureRandom random = new SecureRandom();
+    //private static final byte[] key = new byte[16];
 
     public String encryptValue(String data, String key) {
         byte[] encryptedValue = null;
@@ -56,15 +53,18 @@ public class EncryptionService {
         return new String(decryptedValue);
     }
 
-    public String encryptPassword(String password) {
+    public Map encryptPassword(String password) {
+        var data = new HashMap<String, String>();
+        SecureRandom random = new SecureRandom();
+        byte[] key = new byte[16];
         random.nextBytes(key);
         String encodedKey = Base64.getEncoder().encodeToString(key);
-        return this.encryptValue(password, encodedKey);
+        data.put("encodedKey", encodedKey);
+        data.put("encryptPassword", this.encryptValue(password, encodedKey));
+        return data;
     }
 
-    public String decryptPassword(String encryptedPassword) {
-        random.nextBytes(key);
-        String encodedKey = Base64.getEncoder().encodeToString(key);
+    public String decryptPassword(String encryptedPassword,String encodedKey) {
         return this.decryptValue(encryptedPassword, encodedKey);
     }
 }
