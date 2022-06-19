@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/signup", "/css/**", "/js/**").permitAll()
+                .antMatchers("/signup", "/css/**", "/js/**", "/h2/**").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
@@ -38,6 +38,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .clearAuthentication(true)
                 .permitAll();
+        http.formLogin()
+                .defaultSuccessUrl("/home", true)
+                .failureUrl("/login?error=true");
+        http.csrf()
+                .ignoringAntMatchers("/h2/**");
+        http.headers().frameOptions().sameOrigin();
 
 //      http.formLogin()
 //                .defaultSuccessUrl("/home", true);
