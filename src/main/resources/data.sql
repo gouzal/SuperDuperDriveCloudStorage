@@ -14,7 +14,7 @@ VALUES
   (7,'Carol','WYS26CUD3GG','MMU49RPV4ZL','Beck','Odysseus'),
   (8,'Jorden','PHC34RRP3VY','AJK14WOG2GW','Quinlan','Fritz'),
   (9,'Madeline','MQE10RXG7YT','MNC84PKL9XJ','Neville','Graiden'),
-  (10,'Melodie','HYV48BYU6EA','YXC64UIE5MM','Mary','Wylie');
+  (10,'a','3fI66PA5cb2OmhzkhT+PLQ==','a9BHQEdkOe1PfF/I0yfTwA==','Mary','Wylie');
 
 
 INSERT INTO notes (noteid,notetitle,notedescription,userid)
@@ -42,15 +42,15 @@ VALUES
   (19,'odio. Etiam','Aliquam ornare,',7),
   (20,'nibh sit amet','vel nisl. Quisque',4);
 
-INSERT INTO CREDENTIALS (credentialid,url,username,key,password,userid)
+INSERT INTO CREDENTIALS (credentialid,url,username,password,key,userid)
 VALUES
-  (1,'http://netflix.com','Hayfa','ZSQ18ABX2JB','VSL03QZN4BG',3),
-  (2,'http://facebook.com','Dalton','SUI41XHO8QE','XFT31UXT2WU',7),
-  (3,'https://netflix.com','Zane','BLD55NHZ1NO','BCN46RDJ8TL',2),
-  (4,'https://baidu.com','Briar','KKX49TCF6DN','KBX58VTB8CJ',6),
-  (5,'https://bbc.co.uk','Marshall','ABD17RBP6YG','UTR57BXO7KO',5),
-  (6,'https://yahoo.com','Charde','IPT39GTX1GE','SNW71OYY8QW',2),
-  (7,'http://nytimes.com','Lacy','XHR87PHS4JH','AIK84XVE5PK',9),
-  (8,'https://netflix.com','Yeo','YUP79CNP8CH','TJA04QBC0CY',2),
-  (9,'https://bbc.co.uk','Jessamine','JVW95BOZ1FV','SQS19NTJ4BN',2),
-  (10,'http://reddit.com','Kasimir','YWM96UWY3KM','AYT69JBI7CB',2);
+  (1,'http://netflix.com','Hayfa','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',3),
+  (2,'http://facebook.com','Dalton','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',7),
+  (3,'https://netflix.com','Zane','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',2),
+  (4,'https://baidu.com','Briar','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',6),
+  (5,'https://bbc.co.uk','Marshall','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',5),
+  (6,'https://yahoo.com','Charde','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',2),
+  (7,'http://nytimes.com','Lacy','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',9),
+  (8,'https://netflix.com','Yeo','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',2),
+  (9,'https://bbc.co.uk','Jessamine','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',2),
+  (10,'http://reddit.com','Kasimir','awn1hSz6gSt7F91rsGrhBw==','SchLfwcYUU4yqoP5G9tgLA==',2);
