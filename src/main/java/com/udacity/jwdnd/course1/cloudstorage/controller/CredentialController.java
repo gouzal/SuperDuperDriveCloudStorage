@@ -1,8 +1,9 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
-import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.service.CredentialService;
+import com.udacity.jwdnd.course1.cloudstorage.service.EncryptionService;
+import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,19 +21,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CredentialController {
 
     private final CredentialService credentialService;
+    private final EncryptionService encryptionService;
 
-    public CredentialController(CredentialService credentialService) {
+    public CredentialController(CredentialService credentialService, EncryptionService encryptionService) {
         this.credentialService = credentialService;
+        this.encryptionService = encryptionService;
     }
 
     @PostMapping("add-or-update")
     public String addCredential(@ModelAttribute("credential") Credential credential, Model model) {
-        if (credential.getCredentialId()== null) {
-            credential.setUserId(2L);
+        Map encryptData = this.encryptionService.encryptPassword(credential.getPassword());
+        credential.setPassword(encryptData.get("encryptPassword").toString());
+        credential.setKey(encryptData.get("encodedKey").toString());
+        credential.setUserId(2L);
+        if (credential.getCredentialId() == null) {
             int countInsertedCredential = credentialService.insert(credential);
             model.addAttribute("countInsertedCredential", countInsertedCredential);
         } else {
-            credential.setUserId(2L);
             int countUpdatedCredential = credentialService.update(credential);
             model.addAttribute("countUpdatedCredential", countUpdatedCredential);
         }
