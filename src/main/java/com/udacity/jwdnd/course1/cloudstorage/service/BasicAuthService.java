@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.service;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import java.util.ArrayList;
+import java.util.Optional;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -27,11 +28,12 @@ public class BasicAuthService implements AuthService {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User user = userService.findByUsername(username);
-        if (user != null) {
-            String encodedSalt = user.getSalt();
+        Optional<User> user = userService.findByUsername(username);
+
+        if (user.isPresent()) {
+            String encodedSalt = user.get().getSalt();
             String hashedPassword = hashService.getHashedValue(password, encodedSalt);
-            if (user.getPassword().equals(hashedPassword)) {
+            if (user.get().getPassword().equals(hashedPassword)) {
                 return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
             }
         }

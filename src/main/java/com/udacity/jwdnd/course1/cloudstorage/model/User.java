@@ -1,13 +1,22 @@
 package com.udacity.jwdnd.course1.cloudstorage.model;
 
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class User {
+
     private long userId;
+    @NotNull
+    @Size(min = 6, max = 30)
     private String username;
     private String salt;
     private String password; //todo : convert to char
+    @NotNull
+    @Size(min = 5, max = 30)
     private String firstname;
+    @NotNull
+    @Size(min = 5, max = 30)
     private String lastname;
 
     public User() {
@@ -70,8 +79,6 @@ public class User {
         this.lastname = lastname;
     }
 
-   
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -108,6 +115,5 @@ public class User {
     public String toString() {
         return "User{" + "userid=" + userId + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname + '}';
     }
-    
-    
+
 }
