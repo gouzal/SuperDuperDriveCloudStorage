@@ -20,15 +20,15 @@ public interface UserMapper {
 
     @Select("SELECT * FROM USERS")
     List<User> findAll();
-    // todo : fix this bug
-    @Update("UPDATE  FILES SET notetitle=#{noteTitle}, notedescription=#{noteDescription} WHERE noteid = #{noteId}")
+
+    @Update("UPDATE  USERS SET  salt=#{salt}, password=#{password}, firstname=#{firstname}, lastname=#{lastname}  WHERE userId = #{userId}")
     List<User> update(User user);
 
     @Insert("INSERT INTO USERS(firstname,lastname,username,password,salt) VALUES(#{firstname},#{lastname},#{username},#{password},#{salt})")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     int insert(User user);
 
-    @Delete("DELETE FROM FILES WHERE fileId = #{userId}")
+    @Delete("DELETE FROM USERS WHERE userId = #{userId}")
     int delete(long userId);
 
 }
