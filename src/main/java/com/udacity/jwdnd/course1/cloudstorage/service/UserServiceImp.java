@@ -28,8 +28,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User findByUserName(String userName) {
-        var user = this.userMapper.findByUserName(userName);
+    public User findByUsername(String username) {
+        var user = this.userMapper.findByUsername(username);
         return user;
     }
 

@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService extends AbstractPersistenceService<User> {
 
-    User findByUserName(String userName);
+    User findByUsername(String userName);
 
 }

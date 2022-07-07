@@ -15,13 +15,13 @@ public interface UserMapper {
     @Select("SELECT * FROM USERS WHERE USERID  = #{userId}")
     User find(long userId);
 
-    @Select("SELECT * FROM USERS WHERE username  = '#{userName}'")
-    User findByUserName(String userName);
+    @Select("SELECT * FROM USERS WHERE username  = #{username}")
+    User findByUsername(String username);
 
     @Select("SELECT * FROM USERS")
     List<User> findAll();
     // todo : fix this bug
-    @Update("UPDATE  FILES SET notetitle='#{noteTitle}', notedescription='#{noteDescription}' WHERE noteid = #{noteId}")
+    @Update("UPDATE  FILES SET notetitle=#{noteTitle}, notedescription=#{noteDescription} WHERE noteid = #{noteId}")
     List<User> update(User user);
 
     @Insert("INSERT INTO USERS(firstname,lastname,username,password,salt) VALUES(#{firstname},#{lastname},#{username},#{password},#{salt})")

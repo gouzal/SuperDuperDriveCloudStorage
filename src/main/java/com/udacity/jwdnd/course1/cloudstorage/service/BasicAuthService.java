@@ -27,7 +27,7 @@ public class BasicAuthService implements AuthService {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User user = userService.findByUserName(username);
+        User user = userService.findByUsername(username);
         if (user != null) {
             String encodedSalt = user.getSalt();
             String hashedPassword = hashService.getHashedValue(password, encodedSalt);
