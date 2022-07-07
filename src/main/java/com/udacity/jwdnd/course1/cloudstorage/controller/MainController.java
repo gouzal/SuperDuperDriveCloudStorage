@@ -16,6 +16,9 @@ import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,17 +54,16 @@ public class MainController {
     @GetMapping("/home")
     public String getHomePage(Model model) {
         //load notes
-        var notes = noteService.findAllByUserId(2);
+        var notes = noteService.findAllByUserId(this.getConnectedUserId());
         model.addAttribute("notes", notes);
         model.addAttribute("note", new Note());
         //load Credentials
-        var credentials = this.credentialService.findAllByUserId(2);
+        var credentials = this.credentialService.findAllByUserId(this.getConnectedUserId());
         for (int i = 0; i < credentials.size(); i++) {
             Credential c = credentials.get(i);
             var decPass = this.encryptionService.decryptPassword(c.getPassword(), c.getKey());
             c.setPassword(decPass);
         }
-        //credentials.forEach((c)->{c.setPassword(this.encryptionService.decryptPassword(c.getPassword(),c.getKey()));});
         model.addAttribute("credentials", credentials);
         model.addAttribute("credential", new Credential());
         //load files
@@ -97,4 +99,8 @@ public class MainController {
         return "signup";
     }
 
+    private long getConnectedUserId() throws UsernameNotFoundException {
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return this.userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username)).getUserId();
+    }
 }

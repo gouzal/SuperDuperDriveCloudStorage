@@ -1,9 +1,11 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
-import com.udacity.jwdnd.course1.cloudstorage.service.CredentialService;
-import com.udacity.jwdnd.course1.cloudstorage.service.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.service.NoteService;
+import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,27 +22,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/note")
 public class NoteController {
 
-    //private final UserMapper userMapper;
     private final NoteService noteService;
-    private final CredentialService credentialService;
-    private final FileService fileService;
+    private final UserService userService;
 
-    public NoteController(/*UserMapper userMapper,*/NoteService noteService, CredentialService credentialService, FileService fileService) {
-        //this.userMapper = userMapper;
+    public NoteController(NoteService noteService, UserService userService) {
         this.noteService = noteService;
-        this.credentialService = credentialService;
-        this.fileService = fileService;
+        this.userService = userService;
     }
-
 
     @PostMapping("add-or-update")
     public String addNote(@ModelAttribute("note") Note note, Model model) {
         if (note.getNoteId() == null) {
-            note.setUserId(2L);
+            note.setUserId(getConnectedUserId());
             int countInsertedNote = noteService.insert(note);
             model.addAttribute("countNoteInserted", countInsertedNote);
         } else {
-            note.setUserId(2L);
+            note.setUserId(getConnectedUserId());
             int countUpdatedNote = noteService.update(note);
             model.addAttribute("countNoteInserted", countUpdatedNote);
         }
@@ -56,4 +53,8 @@ public class NoteController {
         return "redirect:/home";
     }
 
+    private long getConnectedUserId() throws UsernameNotFoundException {
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return this.userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username)).getUserId();
+    }
 }

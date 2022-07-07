@@ -3,7 +3,11 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.service.CredentialService;
 import com.udacity.jwdnd.course1.cloudstorage.service.EncryptionService;
+import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import java.util.Map;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +26,12 @@ public class CredentialController {
 
     private final CredentialService credentialService;
     private final EncryptionService encryptionService;
+    private final UserService userService;
 
-    public CredentialController(CredentialService credentialService, EncryptionService encryptionService) {
+    public CredentialController(CredentialService credentialService, EncryptionService encryptionService, UserService userService) {
         this.credentialService = credentialService;
         this.encryptionService = encryptionService;
+        this.userService = userService;
     }
 
     @PostMapping("add-or-update")
@@ -33,7 +39,7 @@ public class CredentialController {
         Map encryptData = this.encryptionService.encryptPassword(credential.getPassword());
         credential.setPassword(encryptData.get("encryptPassword").toString());
         credential.setKey(encryptData.get("encodedKey").toString());
-        credential.setUserId(2L);
+        credential.setUserId(getConnectedUserId());
         if (credential.getCredentialId() == null) {
             int countInsertedCredential = credentialService.insert(credential);
             model.addAttribute("countInsertedCredential", countInsertedCredential);
@@ -53,4 +59,8 @@ public class CredentialController {
         return "redirect:/home";
     }
 
+    private long getConnectedUserId() throws UsernameNotFoundException {
+        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return this.userService.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username)).getUserId();
+    }
 }
