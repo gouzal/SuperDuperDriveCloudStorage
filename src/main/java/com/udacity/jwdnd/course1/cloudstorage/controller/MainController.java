@@ -82,10 +82,10 @@ public class MainController {
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute("user")  User user, BindingResult bindingResult, Model model, HashService hashService) {
+    public String signup(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model, HashService hashService) {
         if (bindingResult.hasErrors()) {
             if (this.userService.findByUsername(user.getUsername()).isPresent()) {
-                bindingResult.addError(new FieldError("user","username", "username is already exists"));
+                bindingResult.addError(new FieldError("user", "username", "username is already exists"));
             }
             return "signup";
         }
