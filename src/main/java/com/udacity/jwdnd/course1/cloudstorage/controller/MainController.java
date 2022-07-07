@@ -93,7 +93,7 @@ public class MainController {
         var passwordData = this.hashPassword(user, hashService);
         user.setPassword(passwordData.get("hash"));
         user.setSalt(passwordData.get("salt"));
-        //this.userService.insert(user);
+        this.userService.insert(user);
         return "signup";
     }
 
