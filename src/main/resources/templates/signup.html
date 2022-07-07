@@ -20,11 +20,11 @@
                                     You successfully signed up! Please continue to the <a>login</a> page.
                                 </div>
                                 <div class="alert alert-danger" th:if="${#fields.hasErrors()}">
+                                   Firstname:<span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">firstname</span><br>
+                                    Lastname:<span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">lastname</span><br>
                                     Username:<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</span><br>
                                     Password:<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</span><br>
-                                    Firstname:<span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">firstname</span><br>
-                                    Lastname:<span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">lastname</span><br>
-                                </div>
+                                         </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputFirstName">First Name</label>

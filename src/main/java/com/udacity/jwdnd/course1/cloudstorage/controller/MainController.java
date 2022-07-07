@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -84,7 +85,7 @@ public class MainController {
     public String signup(@Valid @ModelAttribute("user")  User user, BindingResult bindingResult, Model model, HashService hashService) {
         if (bindingResult.hasErrors()) {
             if (this.userService.findByUsername(user.getUsername()).isPresent()) {
-                bindingResult.addError(new ObjectError("username", "username is already exists"));
+                bindingResult.addError(new FieldError("user","username", "username is already exists"));
             }
             return "signup";
         }
