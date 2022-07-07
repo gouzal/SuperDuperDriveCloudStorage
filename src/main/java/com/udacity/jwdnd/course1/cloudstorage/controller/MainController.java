@@ -11,7 +11,6 @@ import com.udacity.jwdnd.course1.cloudstorage.service.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
 import java.util.Base64;
 import java.util.HashMap;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -67,21 +66,9 @@ public class MainController {
 
     @GetMapping("/login")
     public String displayLogin() {
-       /* List<User> findAll = userService.findAll();
-        for (int i = 0; i < findAll.size(); i++) {
-            User get = findAll.get(i);
-            logger.error(get.toString());
-            logger.error("username:" + get.getUsername());
-            logger.error("password:" + get.getPassword());
-            logger.error("salt:" + get.getSalt());
-        }*/
         return "login";
     }
 
-    /*@PostMapping("/login")
-    public String login() {
-        return "login";
-    }*/
 
     @GetMapping("/signup")
     public String displaySignup(Model model) {
