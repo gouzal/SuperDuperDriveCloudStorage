@@ -64,7 +64,19 @@ public class EncryptionService {
         return data;
     }
 
-    public String decryptPassword(String encryptedPassword,String encodedKey) {
+    public String decryptPassword(String encryptedPassword, String encodedKey) {
         return this.decryptValue(encryptedPassword, encodedKey);
+    }
+
+    public HashMap<String, String> hashPassword(String password, HashService hashService) {
+        var passwordData = new HashMap<String, String>();
+        byte[] salt = new byte[16];
+        java.util.Random random = new java.util.Random();
+        random.nextBytes(salt);
+        String encodedSalt = Base64.getEncoder().encodeToString(salt);
+        String hashedPassword = hashService.getHashedValue(password, encodedSalt);
+        passwordData.put("hash", hashedPassword);
+        passwordData.put("salt", encodedSalt);
+        return passwordData;
     }
 }

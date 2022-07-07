@@ -90,23 +90,11 @@ public class MainController {
             return "signup";
         }
 
-        var passwordData = this.hashPassword(user, hashService);
+        var passwordData = this.encryptionService.hashPassword(user.getPassword(), hashService);
         user.setPassword(passwordData.get("hash"));
         user.setSalt(passwordData.get("salt"));
         this.userService.insert(user);
         return "signup";
     }
 
-    //todo: move to another location
-    private HashMap<String, String> hashPassword(User user, HashService hashService) {
-        var passwordData = new HashMap<String, String>();
-        byte[] salt = new byte[16];
-        java.util.Random random = new java.util.Random();
-        random.nextBytes(salt);
-        String encodedSalt = Base64.getEncoder().encodeToString(salt);
-        String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
-        passwordData.put("hash", hashedPassword);
-        passwordData.put("salt", encodedSalt);
-        return passwordData;
-    }
 }
