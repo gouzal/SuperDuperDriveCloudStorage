@@ -2,6 +2,8 @@ package com.udacity.jwdnd.course1.cloudstorage.service;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService extends AbstractPersistenceService<User> {
 
-     Optional<User> findByUsername(String userName);
+    Optional<User> findByUsername(String userName);
 
 }

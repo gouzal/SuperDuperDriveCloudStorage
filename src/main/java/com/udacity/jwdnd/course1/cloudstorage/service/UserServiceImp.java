@@ -55,4 +55,5 @@ public class UserServiceImp implements UserService {
     public List<User> findAll() {
         return this.userMapper.findAll();
     }
-};
+
+}
