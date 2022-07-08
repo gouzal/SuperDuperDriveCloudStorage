@@ -56,9 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/home", true).successHandler(successHandler())
                 .failureUrl("/login?error=true");
         http.csrf().disable();
-//        http.csrf()
-//                .ignoringAntMatchers("/h2/**");
-//        http.headers().frameOptions().sameOrigin();
+        http.headers().frameOptions().sameOrigin();
 
     }
 
