@@ -2,8 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.service;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.User;
 import java.util.Optional;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**

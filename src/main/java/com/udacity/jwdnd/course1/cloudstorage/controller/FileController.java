@@ -3,8 +3,11 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.service.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.service.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.util.validators.SimpleFileValidator;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +41,14 @@ public class FileController {
 
     @PostMapping("add")
     public String addNewFile(@RequestParam("fileUpload") MultipartFile fileUpload, Model model) {
+        var errors = new SimpleFileValidator(fileUpload).validateAll();
+        List<String> errorsList = Collections.list(Collections.enumeration(errors.values()));
+
+        if (!errorsList.isEmpty()) {
+            
+            model.addAttribute("errorsList",errorsList);
+            return "result";
+        }
         try {
             var file = new File(fileUpload.getOriginalFilename(), fileUpload.getContentType(), String.valueOf(fileUpload.getBytes().length), this.getConnectedUserId(), fileUpload.getBytes());
             var countInsertedFile = fileService.insert(file);
