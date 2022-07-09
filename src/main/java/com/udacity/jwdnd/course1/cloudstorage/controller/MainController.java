@@ -89,7 +89,8 @@ public class MainController {
         var passwordData = this.encryptionService.hashPassword(user.getPassword(), hashService);
         user.setPassword(passwordData.get("hash"));
         user.setSalt(passwordData.get("salt"));
-        this.userService.insert(user);
+        int insert = this.userService.insert(user);
+        model.addAttribute("signup", insert);
         return "signup";
     }
 

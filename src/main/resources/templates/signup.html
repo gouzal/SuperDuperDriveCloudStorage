@@ -16,7 +16,7 @@
 
                             <h1 class="display-5">Sign Up</h1>
                             <form action="#" method="POST" th:object="${user}" th:action="@{signup}">
-                                <div id="success-msg" class="alert alert-dark">
+                                <div id="success-msg" class="alert alert-dark" th:if="${signup > 0}">
                                     You successfully signed up! Please continue to the <a>login</a> page.
                                 </div>
                                 <div class="alert alert-danger" th:if="${#fields.hasErrors()}">
