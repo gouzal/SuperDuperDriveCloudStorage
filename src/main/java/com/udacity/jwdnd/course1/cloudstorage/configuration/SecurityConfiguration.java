@@ -17,8 +17,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final AuthService authService;
-    @Autowired
-    private AppAuthenticationSuccessHandler successHandler1;
 
     public SecurityConfiguration(AuthService authService) {
         this.authService = authService;
