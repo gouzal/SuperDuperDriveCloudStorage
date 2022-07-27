@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface AbstractPersistenceService<T> /*permits NoteService, CredentialService, FileService, UserService*/ {
 
-    public T find(long id);
+    T find(long id);
 
     int update(T obj);
 
