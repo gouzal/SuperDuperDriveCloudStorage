@@ -29,8 +29,7 @@ public class CredentialServiceImp implements CredentialService {
     
     @Override
     public List<Credential> findAllByUserId(long userId) {
-        var credentials = this.credentialMapper.findAllByUserId(userId);
-        return credentials;
+        return this.credentialMapper.findAllByUserId(userId);
     }
     
     @Override
@@ -51,6 +50,6 @@ public class CredentialServiceImp implements CredentialService {
 
     @Override
     public List<Credential> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-};
+}

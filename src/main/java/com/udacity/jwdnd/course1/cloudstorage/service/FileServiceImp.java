@@ -29,8 +29,7 @@ public class FileServiceImp implements FileService {
 
     @Override
     public List<File> findAllByUserId(long userid) {
-        var files = this.fileMapper.findAllByUserId(userid);
-        return files;
+        return this.fileMapper.findAllByUserId(userid);
     }
 
     @Override
@@ -53,4 +52,4 @@ public class FileServiceImp implements FileService {
     public List<File> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
-};
+}
