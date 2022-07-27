@@ -29,8 +29,7 @@ public class NoteServiceImp implements NoteService {
 
     @Override
     public List<Note> findAllByUserId(long userid) {
-        var notes = this.noteMapper.findAllByUserId(userid);
-        return notes;
+        return this.noteMapper.findAllByUserId(userid);
     }
 
     @Override
@@ -53,4 +52,4 @@ public class NoteServiceImp implements NoteService {
     public List<Note> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
-};
+}
