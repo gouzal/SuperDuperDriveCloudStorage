@@ -11,10 +11,7 @@
     <body class="p-3 mb-2 bg-light text-black">
         <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
             <div class="alert alert-danger fill-parent">
-                <h3 class="display-5">Errors List</h3>
-                <ul th:each="s: ${errorsList}">
-                    <li  th:text="${s}"></li>
-                </ul>
+                <h3 class="display-5">An error has occured !</h3>
             </div>
               <span>Click <a th:href="@{/home}">here</a> to continue.</span>
         </div>
