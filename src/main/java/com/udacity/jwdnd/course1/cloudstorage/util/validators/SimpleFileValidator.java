@@ -26,7 +26,7 @@ public class SimpleFileValidator {
     }
 
     protected boolean isSupportedContentType() {
-        return Arrays.stream(SUPPORTED_CONTENT_TYPE).anyMatch(file.getContentType()::equals);
+        return Arrays.asList(SUPPORTED_CONTENT_TYPE).contains(file.getContentType());
     }
 
     public Map<String, String> validateAll() {
