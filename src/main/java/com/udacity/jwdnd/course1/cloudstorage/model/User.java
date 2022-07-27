@@ -2,19 +2,18 @@ package com.udacity.jwdnd.course1.cloudstorage.model;
 
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class User {
 
     private long userId;
     @NotBlank
-    @Size(min = 6, max = 30)
+    @Size(min = 2, max = 30)
     private String username;
     private String salt;
     @NotBlank
     //pattern source from : https://stackoverflow.com/questions/3802192/regexp-java-for-password-validation
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,20}$", message = "Password must contain at least one digit [0-9] Password must contain at least one lowercase Latin character [a-z], must contain at least one uppercase Latin character [A-Z], must contain at least one special character like ! @ # & ( ),and  must contain a length of at least 8 characters and a maximum of 20 characters.")
+    //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,20}$", message = "Password must contain at least one digit [0-9] Password must contain at least one lowercase Latin character [a-z], must contain at least one uppercase Latin character [A-Z], must contain at least one special character like ! @ # & ( ),and  must contain a length of at least 8 characters and a maximum of 20 characters.")
     private String password; //todo : convert to char
     @NotBlank
     @Size(min = 2, max = 20)
